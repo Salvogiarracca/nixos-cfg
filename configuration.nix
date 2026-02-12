@@ -47,6 +47,8 @@
     xwayland.enable = true;
   };
 
+  programs.hyprlock.enable = true;
+
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -57,23 +59,27 @@
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.salvo = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
       wofi
       wezterm
+      telegram-desktop
+      feh
     ];
+    shell = pkgs.zsh;
   };
 
   programs.firefox.enable = true;
@@ -88,6 +94,15 @@
     foot
     fastfetch
     btop
+    wev
+    pavucontrol
+    brightnessctl
+  ];
+  
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    font-awesome
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

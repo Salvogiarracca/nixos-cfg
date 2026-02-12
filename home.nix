@@ -4,6 +4,12 @@
     home.username = "salvo";
     home.homeDirectory = "/home/salvo";
     home.stateVersion = "25.11";
+    home.sessionVariables = {
+        GTK_THEME = "Tokyonight-Dark";
+        XDG_CURRENT_DESKTOP = "Hyprland";
+        GTK_USE_PORTAL = "1";
+        MOZ_ENABLE_WAYLAND = "1";
+    };
     xdg.configFile = {
         "hypr" = {
             source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/hypr";
@@ -14,7 +20,37 @@
         "wezterm" = {
             source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/wezterm";
         };
+        "wofi" = {
+            source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/wofi";
+        };
+        "uwsm" = {
+            source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/uwsm";
+        };
     };
+    gtk = {
+        enable = true;
+
+        theme = {
+            name = "Tokyonight-Dark";
+            package = pkgs.tokyonight-gtk-theme;
+        };
+
+        iconTheme = {
+            name = "Adwaita";
+            package = pkgs.adwaita-icon-theme;
+        };
+
+        gtk3.extraConfig = {
+            gtk-application-prefer-dark-theme = 1;
+        };
+
+        gtk4.extraConfig = {
+            gtk-application-prefer-dark-theme = 1;
+        };
+    };
+
+    programs.hyprlock.enable = true;
+
     programs.git = { 
         enable = true;
         settings = {
@@ -25,19 +61,43 @@
             init.defaultBranch = "main";
         };
     };
+    programs.zsh = {
+        enable = true;
+        enableCompletion = true;
+        autosuggestion.enable = true;
+        syntaxHighlighting.enable = true;
+        shellAliases = {
+            cd = "z";
+            ll = "ls -l";
+            la = "ls -al";
+            update = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/.nixos-config#nixos";
+        };
+        loginExtra = ''
+            if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+                #exec uwsm start default &
+                exec uwsm start hyprland-uwsm.desktop
+            fi
+        '';
+       # initContent = ''
+       #     eval "$(zoxide init zsh)"
+       # '';
+    };
+    programs.zoxide = { 
+        enable = true;
+        enableZshIntegration = true;
+    };
     programs.bash = {
         enable = true;
         shellAliases = {
             ll = "ls -l";
             la = "ls -al";
-            btw = "echo i use nix finally!";
         };
-        profileExtra = ''
-            if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-                exec uwsm start default &
-                #exec uwsm start -S hyprland-uwsm.desktop &
-            fi
-        '';
+        #profileExtra = ''
+        #    if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+        #        #exec uwsm start default &
+        #        exec uwsm start hyprland-uwsm.desktop
+        #    fi
+        #'';
     };
     # uwsm conflict fix
     wayland.windowManager.hyprland = {

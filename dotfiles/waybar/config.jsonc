@@ -9,25 +9,27 @@
     "modules-left": [
         "hyprland/workspaces",
         "custom/sep",
-        "hyprland/window",
-        "custom/sep"
+        "hyprland/window"
+        //"custom/sep"
     ],
     "modules-center": [
+        "clock"
     ],
 
     "modules-right": [
-        "custom/sep",
-        "network",
+        "tray",
         "custom/sep",
         "cpu",
         "custom/sep",
-        "memory",
+        "network",
+        //"custom/sep",
+        //"memory",
+        //"custom/sep", 
+        //"disk",
         "custom/sep",
-        "disk",
+        "pulseaudio",
         "custom/sep",
-        "clock",
-        "custom/sep",
-        "tray"
+        "battery"
     ],
 
     // Modules configuration
@@ -37,7 +39,7 @@
         "warp-on-scroll": false,
         "format": "{name}",
         "persistent-workspaces": {
-            "*" : 9
+            "*" : 5
         }
     },
     "hyprland/window" : {
@@ -82,6 +84,20 @@
     "network": {
         "format": "Online",
         "format-disconnected": "Disconnected ⚠"
+    },
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "Muted",
+        "format-icons": {
+            "headphone": "",
+            /*"hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",*/
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
     },
     "custom/sep": {
         "format" : "|",
