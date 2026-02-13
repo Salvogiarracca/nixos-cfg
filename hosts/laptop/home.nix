@@ -108,5 +108,5 @@
         enable = true;
         systemd.enable = false;
     };
-    nvf.enable = true;
+    #nvf.enable = true;
 }
