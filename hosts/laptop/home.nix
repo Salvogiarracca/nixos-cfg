@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+    imports = [
+        ../../homeManagerModules/default.nix
+    ];
+
     home.username = "salvo";
     home.homeDirectory = "/home/salvo";
     home.stateVersion = "25.11";
@@ -104,5 +108,5 @@
         enable = true;
         systemd.enable = false;
     };
-    myHome.cliPrograms.nvf.enable = true;
+    nvf.enable = true;
 }

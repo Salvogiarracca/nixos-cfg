@@ -15,6 +15,7 @@
 
     outputs = { self, nixpkgs, home-manager, nvf, ... }@inputs: {
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs; };
             system = "x86_64-linux";
             modules = [
                 ./hosts/laptop/configuration.nix
@@ -26,7 +27,8 @@
                         users.salvo = {
                              imports = [
                                 ./hosts/laptop/home.nix
-                                ./homeManagerModules
+                                #./homeManagerModules/default.nix
+                                #nvf.homeManagerModules.default
                             ];
                         };
                     };
