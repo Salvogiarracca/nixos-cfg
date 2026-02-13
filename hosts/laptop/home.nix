@@ -104,4 +104,5 @@
         enable = true;
         systemd.enable = false;
     };
+    myHome.cliPrograms.nvf.enable = true;
 }

@@ -1,3 +1,6 @@
-{
-
+{ ... }:{
+    imports = [
+        ./cliPrograms/nvf.nix
+    ];
 }
+
