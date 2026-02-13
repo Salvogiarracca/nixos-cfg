@@ -27,14 +27,12 @@
                         users.salvo = {
                              imports = [
                                 ./hosts/laptop/home.nix
-                                #inputs.self.outputs.homeManagerModules.default
-                                nvf.homeManagerModules.default
                             ];
                         };
+                        extraSpecialArgs = { inherit nvf; };
                     };
                 }
             ];
         };
-        homeManagerModules.default = ./homeManagerModules;
     };
 }
