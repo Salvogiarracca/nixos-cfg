@@ -2,19 +2,21 @@
   config,
   lib,
   ...
-}: {
+}: let
+  cfg = config.wezterm;
+in {
   options = {
     wezterm.enable = lib.mkEnableOption "enable wezterm";
   };
 
-  config = lib.mkIf config.wezterm.enable {
+  config = lib.mkIf cfg.enable {
+    xdg.configFile."wezterm" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/wezterm";
+    };
+
     programs.wezterm = {
       enable = true;
-      settings = {
-        enable_tab_bar = false;
-        enable_scroll_bar = false;
-        scrollback_lines = 10000;
-      };
+      enableZshIntegration = true;
     };
   };
 }

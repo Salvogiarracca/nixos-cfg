@@ -16,6 +16,7 @@
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Berlin";
+  # nixpkgs.config.allowUnfree = true;
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";

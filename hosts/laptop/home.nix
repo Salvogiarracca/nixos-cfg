@@ -24,9 +24,6 @@
     "waybar" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/waybar";
     };
-    # "wezterm" = {
-    #   source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/wezterm";
-    # };
     "wofi" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/wofi";
     };
