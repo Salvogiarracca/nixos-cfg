@@ -23,20 +23,19 @@ in {
     EDITOR = "nvim";
   };
   xdg.configFile = {
-    "hypr" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/hypr";
-    };
+    # This require nixos-rebuild switch to apply changes (immutability)
     waybar = linkDotfile "waybar";
-    # "waybar" = {
-    #   source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/waybar";
-    # };
-    "wofi" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/wofi";
+    uwsm = linkDotfile "uwsm";
+    # TODO: [DEVELOPMENT] after reaching a good point of the configuration,
+    # change the following "not-tracked" dotfiles with the above pattern
+    "hypr" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/hypr";
     };
-    "uwsm" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/uwsm";
+    "wofi" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/wofi";
     };
   };
+  programs.lazygit.enable = true;
   gtk = {
     enable = true;
 
@@ -80,7 +79,7 @@ in {
       cd = "z";
       ll = "ls -l";
       la = "ls -al";
-      update = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/.nixos-config#nixos";
+      update = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos-config#nixos";
     };
     loginExtra = ''
       if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then

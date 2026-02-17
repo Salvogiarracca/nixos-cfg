@@ -11,7 +11,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     xdg.configFile."wezterm" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/wezterm";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/wezterm";
     };
 
     programs.wezterm = {
