@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  dotfilesDir = ../../dotfiles;
+  dotfilesDir = ../../dotfiles; #here I don't care about the symlink, because is in the store anyway (GOOD!)
   linkDotfile = name: {
     source = "${dotfilesDir}/${name}";
   };
@@ -31,8 +31,15 @@ in {
     "hypr" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/hypr";
     };
+    # NOTE: the following syntax, even if works, it is not a real symlink to ~/nixos-config/dotfiles/wofi
+    # what nix does is looking at the directory (relative tho this file) and create a copy into the nix store.
+    # this breaks the expected behavior (instantly source of the dotfile).
+    # "wofi" = {
+    #   source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/wofi";
+    # };
+    # Doing in the following way (absolute-path), the symlink is real to "nixos-config/dotfiles/wofi" (triple indirection: expected).
     "wofi" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/wofi";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/wofi";
     };
   };
   programs.lazygit.enable = true;
