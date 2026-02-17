@@ -22,9 +22,18 @@
           vimAlias = true;
           globals.mapleader = " ";
           binds.whichKey.enable = true;
-          statusline.lualine.enable = true;
+          statusline.lualine = {
+            enable = true;
+            theme = "tokyonight";
+          };
           autocomplete.nvim-cmp.enable = true;
           telescope.enable = true;
+          theme = {
+            enable = true;
+            name = "tokyonight";
+            style = "storm";
+            transparent = false;
+          };
           lsp = {
             enable = true;
             formatOnSave = true;
@@ -49,10 +58,12 @@
             borders.enable = true;
           };
           options = {
-            tabstop = 4;
-            shiftwidth = 4;
+            autoindent = true;
+            smartindent = true;
+            tabstop = 2;
+            shiftwidth = 2;
             expandtab = true;
-            softtabstop = 4;
+            softtabstop = 2;
           };
           tabline.nvimBufferline.enable = true;
         };

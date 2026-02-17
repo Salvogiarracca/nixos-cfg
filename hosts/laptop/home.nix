@@ -2,7 +2,12 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  dotfilesDir = ../../dotfiles;
+  linkDotfile = name: {
+    source = "${dotfilesDir}/${name}";
+  };
+in {
   imports = [
     ../../homeManagerModules/default.nix
   ];
@@ -21,9 +26,10 @@
     "hypr" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/hypr";
     };
-    "waybar" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/waybar";
-    };
+    waybar = linkDotfile "waybar";
+    # "waybar" = {
+    #   source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/waybar";
+    # };
     "wofi" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos-config/dotfiles/wofi";
     };
@@ -98,5 +104,9 @@
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = false;
+  };
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }

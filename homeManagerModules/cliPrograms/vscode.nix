@@ -13,15 +13,17 @@
       enable = true;
       package = pkgs.vscode-fhs; # Use the FHS version for better extension compatibility
 
-      extensions = with pkgs.vscode-extensions; [
-        jnoortheen.nix-ide
-      ];
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          jnoortheen.nix-ide
+        ];
 
-      userSettings = {
-        "editor.fontSize" = 14;
-        "terminal.integrated.fontFamily" = "JetBrains Mono";
-        "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "nil";
+        userSettings = {
+          "editor.fontSize" = 14;
+          "terminal.integrated.fontFamily" = "JetBrains Mono";
+          "nix.enableLanguageServer" = true;
+          "nix.serverPath" = "nil";
+        };
       };
     };
   };
