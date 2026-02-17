@@ -42,7 +42,6 @@ in {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/wofi";
     };
   };
-  programs.lazygit.enable = true;
   gtk = {
     enable = true;
 
@@ -67,16 +66,6 @@ in {
 
   programs.hyprlock.enable = true;
 
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "Salvatore Giarracca";
-        email = "salvogiarracca07@gmail.com";
-      };
-      init.defaultBranch = "main";
-    };
-  };
   programs.zsh = {
     enable = true;
     enableCompletion = true;
