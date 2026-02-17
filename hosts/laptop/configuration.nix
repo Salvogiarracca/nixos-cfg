@@ -1,14 +1,21 @@
 {
-  config,
-  lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
   ];
 
-  #
+  nixpkgs.overlays = [
+    (final: prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = prev.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      };
+    })
+  ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;

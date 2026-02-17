@@ -11,10 +11,10 @@
   config = lib.mkIf config.vscode.enable {
     programs.vscode = {
       enable = true;
-      package = pkgs.vscode-fhs; # Use the FHS version for better extension compatibility
+      package = pkgs.unstable.vscode-fhs; # Use the FHS version for better extension compatibility
 
       profiles.default = {
-        extensions = with pkgs.vscode-extensions; [
+        extensions = with pkgs.unstable.vscode-extensions; [
           jnoortheen.nix-ide
         ];
 
