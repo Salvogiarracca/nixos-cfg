@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   dotfilesDir = ../../dotfiles; #here I don't care about the symlink, because is in the store anyway (GOOD!)
   linkDotfile = name: {
     source = "${dotfilesDir}/${name}";
@@ -40,27 +36,6 @@ in {
     # Doing in the following way (absolute-path), the symlink is real to "nixos-config/dotfiles/wofi" (triple indirection: expected).
     "wofi" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/wofi";
-    };
-  };
-  gtk = {
-    enable = true;
-
-    theme = {
-      name = "Tokyonight-Dark";
-      package = pkgs.tokyonight-gtk-theme;
-    };
-
-    iconTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
-    };
-
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
     };
   };
 

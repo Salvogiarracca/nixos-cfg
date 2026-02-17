@@ -7,6 +7,7 @@
     #GUI
     ./guiPrograms/wezterm.nix
     ./guiPrograms/vscode.nix
+    ./guiPrograms/theme.nix
   ];
 
   #CLI
@@ -17,4 +18,5 @@
   #GUI
   wezterm.enable = lib.mkDefault true;
   vscode.enable = lib.mkDefault true;
+  theme.enable = lib.mkDefault true;
 }
