@@ -66,35 +66,6 @@ in {
 
   programs.hyprlock.enable = true;
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-    shellAliases = {
-      cd = "z";
-      ll = "ls -l";
-      la = "ls -al";
-      update = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos-config#nixos";
-    };
-    loginExtra = ''
-      if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-          #exec uwsm start default &
-          exec uwsm start hyprland-uwsm.desktop
-      fi
-    '';
-  };
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      ll = "ls -l";
-      la = "ls -al";
-    };
-  };
   # uwsm conflict fix
   wayland.windowManager.hyprland = {
     enable = true;
