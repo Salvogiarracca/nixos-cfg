@@ -57,6 +57,9 @@
       wezterm
       telegram-desktop
       feh
+      vlc
+      copyq
+      localsend
     ];
     shell = pkgs.zsh;
   };
