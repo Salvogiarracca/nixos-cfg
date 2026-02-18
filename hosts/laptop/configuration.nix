@@ -59,6 +59,7 @@
       telegram-desktop
       feh
       vlc
+      libvlc
       copyq
       localsend
       ungoogled-chromium
@@ -73,7 +74,7 @@
     wget
     kitty
     waybar
-    foot
+    # foot
     fastfetch
     btop
     wev
@@ -81,6 +82,8 @@
     brightnessctl
     yazi
     dua
+    ripgrep
+    rsync
   ];
 
   fonts.packages = with pkgs; [
