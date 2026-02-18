@@ -21,6 +21,7 @@ in {
     GTK_USE_PORTAL = "1";
     MOZ_ENABLE_WAYLAND = "1";
     QT_QPA_PLATFORM = "wayland";
+    # QT_QPA_PLATFORMTHEME = "qt5ct"; conflict with gtk,but nice to know
     EDITOR = "nvim";
   };
   xdg.configFile = {
@@ -60,16 +61,4 @@ in {
     libsForQt5.qt5.qtwayland
     adwaita-qt
   ];
-
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
-  services = {
-    gvfs.enable = true;
-    tumbler.enable = true;
-  };
 }

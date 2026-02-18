@@ -80,7 +80,6 @@
     pavucontrol
     brightnessctl
     yazi
-    # xfce.thunar
     dua
   ];
 
@@ -89,6 +88,27 @@
     nerd-fonts.fira-code
     font-awesome
   ];
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
+    ];
+  };
+
+  programs.xfconf.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+
+  services = {
+    gvfs.enable = true;
+    tumbler.enable = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
