@@ -60,6 +60,7 @@
       vlc
       copyq
       localsend
+      ungoogled-chromium
     ];
     shell = pkgs.zsh;
   };
