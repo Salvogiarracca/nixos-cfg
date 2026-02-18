@@ -7,6 +7,7 @@
     ./hardware-configuration.nix
   ];
 
+  nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
     (final: prev: {
       unstable = import inputs.nixpkgs-unstable {
@@ -79,6 +80,7 @@
     pavucontrol
     brightnessctl
     yazi
+    # xfce.thunar
   ];
 
   fonts.packages = with pkgs; [
