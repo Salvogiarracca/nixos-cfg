@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   dotfilesDir = ../../dotfiles; #here I don't care about the symlink, because is in the store anyway (GOOD!)
   linkDotfile = name: {
     source = "${dotfilesDir}/${name}";
@@ -16,6 +20,7 @@ in {
     XDG_CURRENT_DESKTOP = "Hyprland";
     GTK_USE_PORTAL = "1";
     MOZ_ENABLE_WAYLAND = "1";
+    QT_QPA_PLATFORM = "wayland";
     EDITOR = "nvim";
   };
   xdg.configFile = {
@@ -50,4 +55,9 @@ in {
     enable = true;
     enableZshIntegration = true;
   };
+  home.packages = with pkgs; [
+    qt6.qtwayland
+    libsForQt5.qt5.qtwayland
+    adwaita-qt
+  ];
 }

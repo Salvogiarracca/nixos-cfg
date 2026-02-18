@@ -5,7 +5,7 @@
   ...
 }: {
   options = {
-    theme.enable = lib.mkEnableOption "enable gtk theme";
+    theme.enable = lib.mkEnableOption "enable gtk + qt theme";
   };
 
   config = lib.mkIf config.theme.enable {
@@ -29,6 +29,10 @@
       gtk4.extraConfig = {
         gtk-application-prefer-dark-theme = 1;
       };
+    };
+    qt = {
+      enable = true;
+      platformTheme.name = "gtk";
     };
   };
 }
