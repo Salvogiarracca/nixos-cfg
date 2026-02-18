@@ -63,6 +63,7 @@
       copyq
       localsend
       ungoogled-chromium
+      banana-cursor
     ];
     shell = pkgs.zsh;
   };
