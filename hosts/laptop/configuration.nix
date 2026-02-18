@@ -81,6 +81,7 @@
     brightnessctl
     yazi
     # xfce.thunar
+    dua
   ];
 
   fonts.packages = with pkgs; [
