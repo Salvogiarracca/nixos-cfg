@@ -4,6 +4,7 @@
     ./cliPrograms/nvf.nix
     ./cliPrograms/git.nix
     ./cliPrograms/shell.nix
+    ./cliPrograms/yazi.nix
     #GUI
     ./guiPrograms/wezterm.nix
     ./guiPrograms/vscode.nix
@@ -14,6 +15,7 @@
   nvf.enable = lib.mkDefault true;
   git.enable = lib.mkDefault true;
   shell.enable = lib.mkDefault true;
+  yazi.enable = lib.mkDefault true;
 
   #GUI
   wezterm.enable = lib.mkDefault true;

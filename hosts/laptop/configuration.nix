@@ -81,10 +81,16 @@
     wev
     pavucontrol
     brightnessctl
-    yazi
     dua
     ripgrep
     rsync
+    ffmpeg-full
+    p7zip
+    jq
+    poppler
+    fd
+    resvg
+    imagemagick
   ];
 
   fonts.packages = with pkgs; [
