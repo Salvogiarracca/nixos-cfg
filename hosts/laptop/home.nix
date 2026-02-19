@@ -22,7 +22,7 @@ in {
     MOZ_ENABLE_WAYLAND = "1";
     QT_QPA_PLATFORM = "wayland";
     XCURSOR_THEME = "Banana";
-    XCURSOR_SIZE = "24";
+    # XCURSOR_SIZE = "24";
     # QT_QPA_PLATFORMTHEME = "qt5ct"; conflict with gtk,but nice to know
     EDITOR = "nvim";
   };

@@ -22,6 +22,11 @@
         package = pkgs.adwaita-icon-theme;
       };
 
+      cursorTheme = {
+        name = "Banana";
+        package = pkgs.banana-cursor;
+      };
+
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = 1;
       };
@@ -33,6 +38,10 @@
     qt = {
       enable = true;
       platformTheme.name = "gtk";
+      style = {
+        name = "adwaita-dark";
+        package = pkgs.adwaita-qt;
+      };
     };
   };
 }
