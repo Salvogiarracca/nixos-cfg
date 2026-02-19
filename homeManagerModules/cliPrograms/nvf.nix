@@ -1,10 +1,10 @@
 {
-  pkgs,
   lib,
   config,
   nvf,
   ...
-}: {
+}:
+{
   imports = [
     nvf.homeManagerModules.default
   ];
@@ -40,13 +40,36 @@
             lspkind.enable = true;
             lspsaga.enable = true;
           };
+          formatter.conform-nvim = {
+            enable = true;
+          };
+          treesitter = {
+            enable = true;
+            fold = false;
+            highlight.enable = true;
+            context.enable = true;
+          };
+          mini = {
+            align.enable = true;
+            completion.enable = true;
+            # keymap.enable = true;
+            basics.enable = true;
+            git.enable = true;
+          };
+          autopairs.nvim-autopairs.enable = true;
           languages = {
             enableTreesitter = true;
-            enableFormat = true;
+            # enableFormat = true;
             nix = {
               enable = true;
-              # format.enable = true;
-              # format.type = "nixfmt";
+              extraDiagnostics.enable = true;
+              format.enable = true;
+              format.type = [ "nixfmt" ];
+              lsp = {
+                enable = true;
+                servers = [ "nixd" ];
+              };
+              treesitter.enable = true;
             };
             rust.enable = true;
           };
@@ -58,12 +81,14 @@
             borders.enable = true;
           };
           options = {
-            autoindent = true;
-            smartindent = true;
-            tabstop = 2;
-            shiftwidth = 2;
-            expandtab = true;
-            softtabstop = 2;
+            # clipboard.enable = true;
+            # autoindent = true;
+            # breakindent = true;
+            # smartindent = false;
+            # tabstop = 2;
+            # shiftwidth = 2;
+            # expandtab = true;
+            # softtabstop = 2;
           };
           tabline.nvimBufferline.enable = true;
         };
