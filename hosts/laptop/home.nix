@@ -2,12 +2,14 @@
   pkgs,
   config,
   ...
-}: let
-  dotfilesDir = ../../dotfiles; #here I don't care about the symlink, because is in the store anyway (GOOD!)
+}:
+let
+  dotfilesDir = ../../dotfiles; # here I don't care about the symlink, because is in the store anyway (GOOD!)
   linkDotfile = name: {
     source = "${dotfilesDir}/${name}";
   };
-in {
+in
+{
   imports = [
     ../../homeManagerModules/default.nix
   ];
