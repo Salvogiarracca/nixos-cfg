@@ -49,7 +49,8 @@ in
     };
   };
 
-  programs.hyprlock.enable = true;
+  # programs.hyprlock.enable = true;
+  # programs.hypridle.enable = true;
 
   # uwsm conflict fix
   wayland.windowManager.hyprland = {
@@ -64,5 +65,6 @@ in
     qt6.qtwayland
     libsForQt5.qt5.qtwayland
     adwaita-qt
+    hypridle
   ];
 }
