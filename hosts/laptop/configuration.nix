@@ -82,6 +82,7 @@
     pavucontrol
     brightnessctl
     dua
+    bat
     ripgrep
     rsync
     ffmpeg-full

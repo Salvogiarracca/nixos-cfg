@@ -18,6 +18,7 @@
           cd = "z";
           ll = "ls -l";
           la = "ls -al";
+          cat = "bat";
           update = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos-config#nixos";
         };
         loginExtra = ''
