@@ -53,6 +53,7 @@
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager" "video"];
     packages = with pkgs; [
+      nix-prefetch-github
       tree
       wofi
       wezterm
