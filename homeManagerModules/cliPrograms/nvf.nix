@@ -90,7 +90,7 @@
             # expandtab = true;
             # softtabstop = 2;
           };
-          tabline.nvimBufferline.enable = true;
+          # tabline.nvimBufferline.enable = true;
         };
       };
     };
