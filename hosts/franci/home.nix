@@ -26,6 +26,14 @@ in
     XCURSOR_THEME = "Banana";
     EDITOR = "nvim";
   };
+  home.file = {
+    "nixos-config/walls/lockscreen" = {
+      source = "${config.home.homeDirectory}/walls/lockscreen.jpg";
+    };
+    "nixos-config/walls/wall" = {
+      source = "${config.home.homeDirectory}/walls/wallpaper.jpg";
+    };
+  };
   xdg.configFile = {
     # This require nixos-rebuild switch to apply changes (immutability)
     # waybar = linkDotfile "waybar";
