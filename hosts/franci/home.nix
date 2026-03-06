@@ -28,10 +28,10 @@ in
   };
   home.file = {
     "nixos-config/walls/lockscreen" = {
-      source = "${config.home.homeDirectory}/walls/lockscreen.jpg";
+      source = "../../walls/lockscreen.jpg";
     };
     "nixos-config/walls/wall" = {
-      source = "${config.home.homeDirectory}/walls/wallpaper.jpg";
+      source = "../../walls/wallpaper.jpg";
     };
   };
   xdg.configFile = {
