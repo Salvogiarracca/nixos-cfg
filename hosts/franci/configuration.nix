@@ -75,13 +75,6 @@
     shell = pkgs.zsh;
   };
 
-  systemd.services.force-password-change = {
-    description = "Force password change for user";
-    wantedBy = [ "multi-user.target" ];
-    script = "${pkgs.shadow}/bin/chage -d 0 franci";
-  };
-  # programs.firefox.enable = true;
-
   environment.systemPackages = with pkgs; [
     vim
     wget
