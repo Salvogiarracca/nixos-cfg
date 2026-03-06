@@ -55,7 +55,27 @@
         // }
     },
     "clock": {
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "{:%H:%M}",
+        "format-alt": "{:%A, %B %d, %Y (%R)}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "format": {
+                "months":     "<span color='#ffead3'><b>{}</b></span>",
+                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions":  {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
     },
     "cpu": {
         "format": "CPU: {usage}%",
@@ -75,18 +95,27 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "Bat: {capacity}% {icon} {time}",
+        "format": "{capacity}% {icon} ",
         "format-plugged": "{capacity}% ",
-        "format-alt": "Bat {capacity}%",
+        "format-alt": "{capacity}% {icon} {time}",
         "format-time": "{H}:{M}",
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format": "Online",
-        "format-disconnected": "Disconnected ⚠"
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰤮",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-wifi": "{ipaddr}",
+        "tooltip-format-ethernet": "{ipaddr}",
+        "tooltip-format-disconnected": "No Connection",
+        "on-click": "nmtui-edit" 
+        // "tooltip-format": "Interface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}\nNetmask: {netmask}",
+        // "tooltip-format-wifi": "SSID: {essid}\nSignal: {signaldBm}dBm ({signalStrength}%)\nIP: {ipaddr}\nInterface: {ifname}",
+        // "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}\nSpeed: {bandwidthDownBits} ↓ {bandwidthUpBits} ↑",
     },
     "pulseaudio": {
-        "format": "{icon}  {volume}%",
+        "format": "{volume}% {icon}",
         "format-muted": "Muted",
         "format-icons": {
             "headphone": "",

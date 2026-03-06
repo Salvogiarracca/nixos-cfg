@@ -16,6 +16,17 @@
     font-weight: bold;
 }
 
+tooltip {
+    background: rgba(43, 48, 59, 0.9);
+    /* border: 1px solid rgba(100, 114, 125, 0.5); */
+    border-radius: 8px;
+}
+
+tooltip label {
+    color: @white;
+    /* font-family: "JetBrainsMono Nerd Font"; */
+}
+
 window#waybar {
     background-color: @bg;
     color: @fg;
@@ -90,14 +101,22 @@ button:hover {
     color: @grn;
     /*border-bottom: 4px solid @grn;*/
 }
-
 #network {
     color: @blu;
-    /*border-bottom: 4px solid @blu;*/
+    padding: 0 10px;
 }
 
 #network.disconnected {
-    background-color: @red;
+    color: @red;
+    background-color: transparent;
+}
+
+#network.wifi {
+    /* color: @green; */
+}
+
+#network.ethernet {
+    /* color: @yellow; */
 }
 
 #pulseaudio {
