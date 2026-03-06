@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options = {
     git.enable = lib.mkEnableOption "enable git";
   };
@@ -12,10 +13,10 @@
       git = {
         enable = true;
         settings = {
-          user = {
-            name = "Salvatore Giarracca";
-            email = "salvogiarracca07@gmail.com";
-          };
+          # user = {
+          #   name = "Salvatore Giarracca";
+          #   email = "salvogiarracca07@gmail.com";
+          # };
           init.defaultBranch = "main";
         };
       };

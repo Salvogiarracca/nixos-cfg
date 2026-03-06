@@ -14,43 +14,53 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nixpkgs-unstable,
-    home-manager,
-    nvf,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux";
-  in {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {
-        inherit inputs;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      nvf,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
+      extraSpecialArgs = { inherit nvf; };
+    in
+    {
+      nixosConfigurations = {
+        salvo = nixpkgs.lib.nixosSystem {
+          inherit system specialArgs;
+          modules = [
+            ./hosts/salvo/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                inherit extraSpecialArgs;
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.salvo.imports = [ ./hosts/salvo/home.nix ];
+              };
+            }
+          ];
+        };
+
+        franci = nixpkgs.lib.nixosSystem {
+          inherit system specialArgs;
+          modules = [
+            ./hosts/franci/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                inherit extraSpecialArgs;
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.franci.imports = [ ./hosts/franci/home.nix ];
+              };
+            }
+          ];
+        };
       };
-      modules = [
-        ./hosts/laptop/configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "backup";
-            users.salvo = {
-              imports = [
-                ./hosts/laptop/home.nix
-              ];
-            };
-            extraSpecialArgs = {
-              inherit nvf;
-            };
-          };
-        }
-        # {
-        #   nixpkgs.config.allowUnfree = true;
-        # }
-      ];
     };
-  };
 }

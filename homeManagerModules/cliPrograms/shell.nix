@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options = {
     shell.enable = lib.mkEnableOption "enable shell";
   };
@@ -19,7 +20,6 @@
           ll = "ls -l";
           la = "ls -al";
           cat = "bat";
-          update = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos-config#nixos";
         };
         loginExtra = ''
           if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then

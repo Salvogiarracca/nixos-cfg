@@ -21,11 +21,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  services.getty.autologinUser = "salvo";
-  networking.hostName = "nixos"; # Define your hostname.
+  services.getty.autologinUser = "franci";
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Berlin";
-  # nixpkgs.config.allowUnfree = true;
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
@@ -50,8 +49,10 @@
 
   programs.zsh.enable = true;
 
-  users.users.salvo = {
+  users.users.franci = {
     isNormalUser = true;
+    initialPassword = "nixos";
+
     extraGroups = [
       "wheel"
       "networkmanager"
@@ -68,12 +69,17 @@
       libvlc
       copyq
       localsend
-      ungoogled-chromium
-      # banana-cursor
+      # ungoogled-chromium
+      google-chrome
     ];
     shell = pkgs.zsh;
   };
 
+  systemd.services.force-password-change = {
+    description = "Force password change for user";
+    wantedBy = [ "multi-user.target" ];
+    script = "${pkgs.shadow}/bin/chage -d 0 franci";
+  };
   # programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -81,7 +87,6 @@
     wget
     kitty
     waybar
-    # foot
     fastfetch
     btop
     wev

@@ -14,8 +14,8 @@ in
     ../../homeManagerModules/default.nix
   ];
 
-  home.username = "salvo";
-  home.homeDirectory = "/home/salvo";
+  home.username = "franci";
+  home.homeDirectory = "/home/franci";
   home.stateVersion = "25.11";
   home.sessionVariables = {
     GTK_THEME = "Tokyonight-Dark";
@@ -24,16 +24,17 @@ in
     MOZ_ENABLE_WAYLAND = "1";
     QT_QPA_PLATFORM = "wayland";
     XCURSOR_THEME = "Banana";
-    # XCURSOR_SIZE = "24";
-    # QT_QPA_PLATFORMTHEME = "qt5ct"; conflict with gtk,but nice to know
     EDITOR = "nvim";
   };
   xdg.configFile = {
     # This require nixos-rebuild switch to apply changes (immutability)
-    waybar = linkDotfile "waybar";
+    # waybar = linkDotfile "waybar";
     uwsm = linkDotfile "uwsm";
     # TODO: [DEVELOPMENT] after reaching a good point of the configuration,
     # change the following "not-tracked" dotfiles with the above pattern
+    "waybar" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/waybar";
+    };
     "hypr" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/hypr";
     };
@@ -47,6 +48,15 @@ in
     "wofi" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/wofi";
     };
+  };
+
+  programs.git.settings = {
+    user.name = "Francesca Sanna";
+    user.email = "francifras97@gmail.com";
+  };
+
+  programs.zsh.shellAliases = {
+    update = "sudo nixos-rebuild switch --flake .#franci";
   };
 
   # uwsm conflict fix
@@ -65,4 +75,6 @@ in
     hypridle
     hyprpaper
   ];
+
+  blender.enable = false;
 }
