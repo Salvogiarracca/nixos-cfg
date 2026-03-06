@@ -49,15 +49,7 @@
   };
 
   programs.zsh.enable = true;
-  users.users.franci = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "video"
-    ];
 
-  };
   users.users.salvo = {
     isNormalUser = true;
     extraGroups = [
@@ -89,7 +81,6 @@
     wget
     kitty
     waybar
-    # foot
     fastfetch
     btop
     wev
