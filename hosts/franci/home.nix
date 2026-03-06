@@ -28,10 +28,10 @@ in
   };
   home.file = {
     "nixos-config/walls/lockscreen" = {
-      source = "../../walls/lockscreen.jpg";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/walls/lockscreen.jpg";
     };
     "nixos-config/walls/wall" = {
-      source = "../../walls/wallpaper.jpg";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/walls/wallpaper.jpg";
     };
   };
   xdg.configFile = {
