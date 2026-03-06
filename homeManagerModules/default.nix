@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   imports = [
     #CLI
     ./cliPrograms/nvf.nix
@@ -9,6 +10,7 @@
     ./guiPrograms/wezterm.nix
     ./guiPrograms/vscode.nix
     ./guiPrograms/theme.nix
+    ./guiPrograms/blender.nix
   ];
 
   #CLI
@@ -21,4 +23,5 @@
   wezterm.enable = lib.mkDefault true;
   vscode.enable = lib.mkDefault true;
   theme.enable = lib.mkDefault true;
+  blender.enable = lib.mkDefault true;
 }
