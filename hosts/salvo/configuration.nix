@@ -49,28 +49,56 @@
   time.timeZone = "Europe/Berlin";
   # nixpkgs.config.allowUnfree = true;
 
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "it_IT.UTF-8";
+      LC_IDENTIFICATION = "it_IT.UTF-8";
+      LC_MEASUREMENT = "it_IT.UTF-8";
+      LC_MONETARY = "it_IT.UTF-8";
+      LC_NAME = "it_IT.UTF-8";
+      LC_NUMERIC = "it_IT.UTF-8";
+      LC_PAPER = "it_IT.UTF-8";
+      LC_TELEPHONE = "it_IT.UTF-8";
+      LC_TIME = "it_IT.UTF-8";
+    };
+  };
+  console = {
+    font = "Lat2-Terminus16";
+    useXkbConfig = true;
   };
 
-  programs.hyprlock.enable = true;
+  programs = {
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+      xwayland.enable = true;
+    };
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
 
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
+    hyprlock.enable = true;
+    zsh.enable = true;
+    xfconf.enable = true;
   };
 
-  programs.zsh.enable = true;
+  services = {
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
+    gvfs.enable = true;
+    tumbler.enable = true;
+  };
 
   users.users.salvo = {
     isNormalUser = true;
@@ -91,7 +119,6 @@
       copyq
       localsend
       ungoogled-chromium
-      # banana-cursor
     ];
     shell = pkgs.zsh;
   };
@@ -131,20 +158,6 @@
     extraPortals = [
       pkgs.xdg-desktop-portal-wlr
     ];
-  };
-
-  programs.xfconf.enable = true;
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
-
-  services = {
-    gvfs.enable = true;
-    tumbler.enable = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
