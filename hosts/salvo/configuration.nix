@@ -104,7 +104,6 @@
     kitty
     waybar
     fastfetch
-    btop
     wev
     pavucontrol
     brightnessctl

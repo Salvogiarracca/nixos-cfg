@@ -6,6 +6,7 @@
     ./cliPrograms/git.nix
     ./cliPrograms/shell.nix
     ./cliPrograms/yazi.nix
+    ./cliPrograms/btop.nix
     #GUI
     ./guiPrograms/wezterm.nix
     ./guiPrograms/vscode.nix
@@ -18,6 +19,7 @@
   git.enable = lib.mkDefault true;
   shell.enable = lib.mkDefault true;
   yazi.enable = lib.mkDefault true;
+  btop.enable = lib.mkDefault true;
 
   #GUI
   wezterm.enable = lib.mkDefault true;
