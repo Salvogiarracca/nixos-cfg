@@ -26,6 +26,8 @@
         //"memory",
         //"custom/sep", 
         //"disk",
+        // "custom/sep",
+        "bluetooth",
         "custom/sep",
         "pulseaudio",
         "custom/sep",
@@ -54,6 +56,16 @@
         //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
         // }
     },
+    "bluetooth": {
+        "format": "󰂯 ",
+        "format-connected": "󰂱",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "blueman-manager"
+    },
     "clock": {
         "format": "{:%H:%M}",
         "format-alt": "{:%A, %B %d, %Y (%R)}",
@@ -78,7 +90,7 @@
         }
     },
     "cpu": {
-        "format": "CPU: {usage}%",
+        "format": " {usage}%",
         "tooltip": false
     },
     "memory": {

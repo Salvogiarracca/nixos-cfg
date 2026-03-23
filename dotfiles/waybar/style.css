@@ -101,8 +101,14 @@ button:hover {
     color: @grn;
     /*border-bottom: 4px solid @grn;*/
 }
-#network {
+
+#bluetooth {
     color: @blu;
+    /* padding: 0 10px; */
+}
+
+#network {
+    color: @cyn;
     padding: 0 10px;
 }
 

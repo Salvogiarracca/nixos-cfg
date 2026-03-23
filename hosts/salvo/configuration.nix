@@ -43,7 +43,6 @@
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  services.getty.autologinUser = "salvo";
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Berlin";
@@ -87,7 +86,28 @@
     xfconf.enable = true;
   };
 
+  hardware = {
+    bluetooth = {
+      enable = true;
+      # powerOnBoot = true;
+      settings = {
+        General = {
+          Experimental = true;
+          AutoEnable = false;
+          RemeberPowered = true;
+        };
+      };
+    };
+  };
+  environment.etc."xdg/autostart/blueman.desktop".source = pkgs.writeText "blueman.desktop" ''
+    [Desktop Entry]
+    Type=Application
+    NoDisplay=true
+    Exec=true
+  '';
   services = {
+    getty.autologinUser = "salvo";
+    blueman.enable = true;
     pipewire = {
       enable = true;
       pulse.enable = true;
