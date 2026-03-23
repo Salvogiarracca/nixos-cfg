@@ -28,6 +28,14 @@ in
     # QT_QPA_PLATFORMTHEME = "qt5ct"; conflict with gtk,but nice to know
     EDITOR = "nvim";
   };
+  home.file = {
+    "nixos-config/walls/lockscreen" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/walls/lockscreen.jpg";
+    };
+    "nixos-config/walls/wall" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/walls/wallpaper.jpg";
+    };
+  };
   xdg.configFile = {
     # This require nixos-rebuild switch to apply changes (immutability)
     # waybar = linkDotfile "waybar";
