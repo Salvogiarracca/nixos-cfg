@@ -40,6 +40,7 @@
                 inherit extraSpecialArgs;
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                backupFileExtension = "backup";
                 users.salvo.imports = [ ./hosts/salvo/home.nix ];
               };
             }
@@ -56,6 +57,7 @@
                 inherit extraSpecialArgs;
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                backupFileExtension = "backup";
                 users.franci.imports = [ ./hosts/franci/home.nix ];
               };
             }
