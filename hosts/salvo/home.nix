@@ -78,4 +78,5 @@ in
     hyprpaper
     orca-slicer
   ];
+  # blender.enable = false;
 }
