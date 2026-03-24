@@ -19,6 +19,7 @@
     "modules-right": [
         "tray",
         "custom/sep",
+        "temperature",
         "cpu",
         "custom/sep",
         "network",
@@ -89,9 +90,31 @@
             "on-scroll-down": "shift_down"
         }
     },
+
     "cpu": {
+        "interval": 1,
         "format": " {usage}%",
-        "tooltip": false
+        "tooltip": true,
+        "on-click": "wezterm -e btop",
+        "format-icons": [" ", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "tooltip-format": "CPU Usage: {usage}%\n\n{usage_per_cpu}%"
+    },
+    "temperature": {
+        "interval": 1,
+        "thermal-zone": 6,
+        "critical-threshold": 80,
+        // "format": "{icon} {temperatureC}°C",
+        // "format-critical": "{icon} {temperatureC}°C",
+        "format": "{icon}",
+        "format-critical": "{icon}",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": true,
+        "states": {
+            "cool": 40,
+            "warm": 55,
+            "hot": 70,
+            "critical": 80
+        }
     },
     "memory": {
         "format": "Mem: {used}GiB"

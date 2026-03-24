@@ -10,6 +10,13 @@
 @define-color brblk #444b6a; 
 @define-color white #ffffff; 
 
+/* Temperature */
+@define-color temp_blue #89b4fa;
+@define-color temp_green #a6e3a1;
+@define-color temp_yellow #f9e2af;
+@define-color temp_orange #fab387;
+@define-color temp_red #f38ba8;
+
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 16px;
@@ -102,6 +109,26 @@ button:hover {
     /*border-bottom: 4px solid @grn;*/
 }
 
+#temperature {
+    color: @temp_green;
+}
+
+#temperature.cold {
+    color: @temp_blue; 
+}
+
+#temperature.warning {
+    color: @temp_yellow;
+}
+
+#temperature.critical {
+    color: @temp_red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
 #bluetooth {
     color: @blu;
     /* padding: 0 10px; */
