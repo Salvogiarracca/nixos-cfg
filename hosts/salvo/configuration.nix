@@ -87,6 +87,7 @@
   };
 
   hardware = {
+    sensor.iio.enable = true;
     bluetooth = {
       enable = true;
       settings = {
@@ -116,6 +117,7 @@
     };
     gvfs.enable = true;
     tumbler.enable = true;
+    libinput.enable = true;
   };
 
   users.users.salvo = {
@@ -125,6 +127,7 @@
       "networkmanager"
       "bluetooth"
       "video"
+      "input"
     ];
     packages = with pkgs; [
       nix-prefetch-github
@@ -164,6 +167,9 @@
     fd
     resvg
     imagemagick
+    iio-sensor-proxy
+    rot8
+    wvkbd
   ];
 
   fonts.packages = with pkgs; [
