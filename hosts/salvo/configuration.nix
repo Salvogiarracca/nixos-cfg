@@ -89,7 +89,6 @@
   hardware = {
     bluetooth = {
       enable = true;
-      # powerOnBoot = true;
       settings = {
         General = {
           Experimental = true;
@@ -99,15 +98,14 @@
       };
     };
   };
-  environment.etc."xdg/autostart/blueman.desktop".source = pkgs.writeText "blueman.desktop" ''
-    [Desktop Entry]
-    Type=Application
-    NoDisplay=true
-    Exec=true
-  '';
+  # environment.etc."xdg/autostart/blueman.desktop".source = pkgs.writeText "blueman.desktop" ''
+  #   [Desktop Entry]
+  #   Type=Application
+  #   NoDisplay=true
+  #   Exec=true
+  # '';
   services = {
     getty.autologinUser = "salvo";
-    blueman.enable = true;
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -125,6 +123,7 @@
     extraGroups = [
       "wheel"
       "networkmanager"
+      "bluetooth"
       "video"
     ];
     packages = with pkgs; [

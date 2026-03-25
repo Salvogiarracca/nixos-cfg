@@ -65,7 +65,7 @@
         "tooltip-format": "{controller_alias}\t{controller_address}",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "blueman-manager"
+        "on-click": "wezterm -e bluetui"
     },
     "clock": {
         "format": "{:%H:%M}",
@@ -130,9 +130,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon} ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{capacity}% {icon} {time}",
+        "format": "{icon} {capacity}%",
+        "format-charging": "󱐋{icon} {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
         "format-time": "{H}:{M}",
         "format-icons": ["", "", "", "", ""]
     },
@@ -144,21 +145,20 @@
         "tooltip-format-wifi": "{ipaddr}",
         "tooltip-format-ethernet": "{ipaddr}",
         "tooltip-format-disconnected": "No Connection",
-        "on-click": "nmtui-edit" 
-        // "tooltip-format": "Interface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}\nNetmask: {netmask}",
-        // "tooltip-format-wifi": "SSID: {essid}\nSignal: {signaldBm}dBm ({signalStrength}%)\nIP: {ipaddr}\nInterface: {ifname}",
-        // "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}\nSpeed: {bandwidthDownBits} ↓ {bandwidthUpBits} ↑",
+        // "on-click": "wezterm start -- nmtui"
+        "on-click": "wezterm -e sh -c 'sleep 0.1 && nmtui'"
     },
     "pulseaudio": {
-        "format": "{volume}% {icon}",
-        "format-muted": "Muted",
+        "format": "{icon} {volume}%",
+        // "format-muted": "Muted",
+        "format-muted": "󰝟 {volume}%",
         "format-icons": {
             "headphone": "",
-            /*"hands-free": "",
-            "headset": "",
+            "hands-free": "󱡒",
+            "headset": "󰋎",
             "phone": "",
             "portable": "",
-            "car": "",*/
+            "car": "",
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"

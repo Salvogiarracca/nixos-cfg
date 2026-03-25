@@ -91,6 +91,7 @@ button:hover {
 
 #battery {
     color: @mag;
+    /* padding: 0 15; */
     /*border-bottom: 4px solid @mag;*/
 }
 

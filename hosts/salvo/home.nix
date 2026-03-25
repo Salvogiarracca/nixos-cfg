@@ -60,7 +60,6 @@ in
     };
   };
 
-  # services.blueman-applet.enable = false;
   programs.git.settings = {
     user.name = "Salvatore Giarracca";
     user.email = "salvogiarracca07@gmail.com";
@@ -86,7 +85,8 @@ in
     hypridle
     hyprpaper
     orca-slicer
-    blueman
+    bluetui
+    bluez
   ];
   # blender.enable = false;
 }
