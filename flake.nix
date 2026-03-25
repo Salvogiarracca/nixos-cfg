@@ -12,6 +12,10 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    spicetify = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -21,12 +25,16 @@
       nixpkgs-unstable,
       home-manager,
       nvf,
+      spicetify,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
-      extraSpecialArgs = { inherit nvf; };
+      extraSpecialArgs = {
+        inherit nvf;
+        inherit spicetify;
+      };
     in
     {
       nixosConfigurations = {

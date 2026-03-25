@@ -12,6 +12,7 @@
     ./guiPrograms/vscode.nix
     ./guiPrograms/theme.nix
     ./guiPrograms/blender.nix
+    ./guiPrograms/spicetify.nix
   ];
 
   #CLI
@@ -26,4 +27,5 @@
   vscode.enable = lib.mkDefault true;
   theme.enable = lib.mkDefault true;
   blender.enable = lib.mkDefault true;
+  spicetify.enable = lib.mkDefault true;
 }
