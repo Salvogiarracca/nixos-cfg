@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options = {
     vscode.enable = lib.mkEnableOption "enable vscode";
   };
@@ -16,6 +17,14 @@
       profiles.default = {
         extensions = with pkgs.unstable.vscode-extensions; [
           jnoortheen.nix-ide
+          mkhl.direnv
+          tamasfe.even-better-toml
+          rust-lang.rust-analyzer
+          vadimcn.vscode-lldb
+          fill-labs.dependi
+          usernamehw.errorlens
+          eamodio.gitlens
+          serayuzgur.crates
         ];
 
         userSettings = {
