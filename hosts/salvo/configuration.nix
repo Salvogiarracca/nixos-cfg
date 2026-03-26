@@ -40,10 +40,8 @@
       '';
     };
   };
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Berlin";
   # nixpkgs.config.allowUnfree = true;
@@ -88,6 +86,10 @@
 
   hardware = {
     sensor.iio.enable = true;
+    opentabletdriver = {
+      enable = true;
+      daemon.enable = true;
+    };
     bluetooth = {
       enable = true;
       settings = {
@@ -99,12 +101,7 @@
       };
     };
   };
-  # environment.etc."xdg/autostart/blueman.desktop".source = pkgs.writeText "blueman.desktop" ''
-  #   [Desktop Entry]
-  #   Type=Application
-  #   NoDisplay=true
-  #   Exec=true
-  # '';
+
   services = {
     getty.autologinUser = "salvo";
     pipewire = {
@@ -118,34 +115,38 @@
     gvfs.enable = true;
     tumbler.enable = true;
     libinput.enable = true;
+    udev.packages = with pkgs; [
+      libwacom
+      vial
+    ];
   };
 
-  users.users.salvo = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "bluetooth"
-      "video"
-      "input"
-    ];
-    packages = with pkgs; [
-      nix-prefetch-github
-      tree
-      wofi
-      wezterm
-      telegram-desktop
-      feh
-      vlc
-      libvlc
-      copyq
-      localsend
-      ungoogled-chromium
-    ];
-    shell = pkgs.zsh;
+  users = {
+    users.salvo = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "bluetooth"
+        "video"
+        "input"
+      ];
+      packages = with pkgs; [
+        nix-prefetch-github
+        tree
+        wofi
+        wezterm
+        telegram-desktop
+        feh
+        vlc
+        libvlc
+        copyq
+        localsend
+        ungoogled-chromium
+      ];
+      shell = pkgs.zsh;
+    };
   };
-
-  # programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
@@ -170,6 +171,9 @@
     iio-sensor-proxy
     rot8
     wvkbd
+    libinput
+    vial
+    direnv
   ];
 
   fonts.packages = with pkgs; [
