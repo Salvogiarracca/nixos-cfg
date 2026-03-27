@@ -60,39 +60,54 @@ in
     };
   };
 
-  systemd.user.services.battery-notifier = {
-    Unit = {
-      Description = "Battery level notifier service";
-      PartOf = [ "graphical-session.target" ];
-      After = [ "graphical-session.target" ];
-    };
+  systemd.user.services = {
+    battery-notifier = {
+      Unit = {
+        Description = "Battery level notifier service";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
 
-    Service = {
-      Type = "simple";
-      ExecStart = "${pkgs.writeShellScript "battery-check" ''
-        while true; do
-          if [ -d /sys/class/power_supply/BAT1 ]; then
-            LEVEL=$(cat /sys/class/power_supply/BAT1/capacity)
-            STATUS=$(cat /sys/class/power_supply/BAT1/status)
+      Service = {
+        Type = "simple";
+        ExecStart = "${pkgs.writeShellScript "battery-check" ''
+          while true; do
+            if [ -d /sys/class/power_supply/BAT1 ]; then
+              LEVEL=$(cat /sys/class/power_supply/BAT1/capacity)
+              STATUS=$(cat /sys/class/power_supply/BAT1/status)
 
-            if [ "$STATUS" = "Discharging" ]; then
-              if [ "$LEVEL" -le 5 ]; then
-                ${pkgs.libnotify}/bin/notify-send -u critical "Battery Critical" "Plug in immediately! Level: $LEVEL%"
-              elif [ "$LEVEL" -le 15 ]; then
-                ${pkgs.libnotify}/bin/notify-send -u normal "Battery Low" "Level: $LEVEL%"
+              if [ "$STATUS" = "Discharging" ]; then
+                if [ "$LEVEL" -le 5 ]; then
+                  ${pkgs.libnotify}/bin/notify-send -u critical "Battery Critical" "Plug in immediately! Level: $LEVEL%"
+                elif [ "$LEVEL" -le 15 ]; then
+                  ${pkgs.libnotify}/bin/notify-send -u normal "Battery Low" "Level: $LEVEL%"
+                fi
               fi
             fi
-          fi
-          sleep 60
-        done
-      ''}";
-      Restart = "always";
-      RestartSec = 5;
-    };
+            sleep 60
+          done
+        ''}";
+        Restart = "always";
+        RestartSec = 5;
+      };
 
-    Install = {
-      # This starts the service automatically when your session starts
-      WantedBy = [ "graphical-session.target" ];
+      Install = {
+        # This starts the service automatically when your session starts
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+    hyprpolkitagent = {
+      Unit = {
+        Description = "hyprpolkitagent";
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
   };
   # systemd.user.services.battery-notifier = {
@@ -148,6 +163,7 @@ in
     bluetui
     bluez
     libnotify
+    krita
   ];
   services = {
     mako = {

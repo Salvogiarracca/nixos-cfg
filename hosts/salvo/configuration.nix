@@ -119,7 +119,9 @@
       libwacom
       vial
     ];
+    udisks2.enable = true;
   };
+  security.polkit.enable = true;
 
   users = {
     users.salvo = {
