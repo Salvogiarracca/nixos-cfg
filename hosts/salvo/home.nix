@@ -60,6 +60,66 @@ in
     };
   };
 
+  systemd.user.services.battery-notifier = {
+    Unit = {
+      Description = "Battery level notifier service";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.writeShellScript "battery-check" ''
+        while true; do
+          if [ -d /sys/class/power_supply/BAT1 ]; then
+            LEVEL=$(cat /sys/class/power_supply/BAT1/capacity)
+            STATUS=$(cat /sys/class/power_supply/BAT1/status)
+
+            if [ "$STATUS" = "Discharging" ]; then
+              if [ "$LEVEL" -le 5 ]; then
+                ${pkgs.libnotify}/bin/notify-send -u critical "Battery Critical" "Plug in immediately! Level: $LEVEL%"
+              elif [ "$LEVEL" -le 15 ]; then
+                ${pkgs.libnotify}/bin/notify-send -u normal "Battery Low" "Level: $LEVEL%"
+              fi
+            fi
+          fi
+          sleep 60
+        done
+      ''}";
+      Restart = "always";
+      RestartSec = 5;
+    };
+
+    Install = {
+      # This starts the service automatically when your session starts
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+  # systemd.user.services.battery-notifier = {
+  #   Unit = {
+  #     Description = "Battery level notifier";
+  #     # PartOf ensures it stops when the session ends
+  #     PartOf = [ "graphical-session.target" ];
+  #   };
+  #   Service = {
+  #     Type = "simple";
+  #     ExecStart = "${pkgs.writeShellScript "battery-check" ''
+  #       while true; do
+  #         LEVEL=$(cat /sys/class/power_supply/BAT1/capacity)
+  #         STATUS=$(cat /sys/class/power_supply/BAT1/status)
+  #         if [ "$STATUS" = "Discharging" ] && [ "$LEVEL" -le 5 ]; then
+  #           ${pkgs.libnotify}/bin/notify-send -u critical -t 0 "Battery Critical" "Level: $LEVEL%"
+  #         fi
+  #         sleep 60
+  #       done
+  #     ''}";
+  #   };
+  #   Install = {
+  #     # This is the 'trigger'—it starts when your Wayland session is ready
+  #     WantedBy = [ "graphical-session.target" ];
+  #   };
+  # };
+
   programs.git.settings = {
     user.name = "Salvatore Giarracca";
     user.email = "salvogiarracca07@gmail.com";
@@ -87,6 +147,7 @@ in
     orca-slicer
     bluetui
     bluez
+    libnotify
   ];
   services = {
     mako = {
@@ -102,6 +163,13 @@ in
         default-timeout = 5000;
         anchor = "top-right";
       };
+      extraConfig = ''
+        [urgency=critical]
+        background-color=#f38ba8
+        text-color=#11111b
+        border-color=#eba0ac
+        default-timeout=0
+      '';
     };
   };
   # blender.enable = false;
