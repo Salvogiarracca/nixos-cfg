@@ -16,6 +16,7 @@
 
       profiles.default = {
         extensions = with pkgs.unstable.vscode-extensions; [
+          vscodevim.vim
           jnoortheen.nix-ide
           mkhl.direnv
           tamasfe.even-better-toml
@@ -24,12 +25,12 @@
           fill-labs.dependi
           usernamehw.errorlens
           eamodio.gitlens
-          serayuzgur.crates
         ];
 
         userSettings = {
           "editor.fontSize" = 14;
-          "terminal.integrated.fontFamily" = "JetBrains Mono";
+          "editor.fontFamily" = "'JetBrainsMono Nerd Font', monospace";
+          "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font', monospace";
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nil";
         };
