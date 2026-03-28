@@ -162,8 +162,8 @@ button:hover {
 #pulseaudio.muted {
     color: @red
 }
-
-#tray {
-    background-color: #2980b9;
-}
+/**/
+/* #tray { */
+/*     background-color: #2980b9; */
+/* } */
 
