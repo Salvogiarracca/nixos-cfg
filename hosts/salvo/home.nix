@@ -164,6 +164,8 @@ in
     bluez
     libnotify
     krita
+    hyprshot
+    wl-clipboard
   ];
   services = {
     mako = {
