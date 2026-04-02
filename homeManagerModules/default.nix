@@ -3,6 +3,7 @@
   imports = [
     #CLI
     ./cliPrograms/nvf.nix
+    ./cliPrograms/lazyvim.nix
     ./cliPrograms/git.nix
     ./cliPrograms/shell.nix
     ./cliPrograms/yazi.nix
@@ -17,6 +18,7 @@
 
   #CLI
   nvf.enable = lib.mkDefault true;
+  lazyvim.enable = lib.mkDefault true;
   git.enable = lib.mkDefault true;
   shell.enable = lib.mkDefault true;
   yazi.enable = lib.mkDefault true;

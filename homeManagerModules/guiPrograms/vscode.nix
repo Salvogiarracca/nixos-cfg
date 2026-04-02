@@ -16,7 +16,7 @@
 
       profiles.default = {
         extensions = with pkgs.unstable.vscode-extensions; [
-          vscodevim.vim
+          asvetliakov.vscode-neovim
           jnoortheen.nix-ide
           mkhl.direnv
           tamasfe.even-better-toml
@@ -33,6 +33,9 @@
           "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font', monospace";
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nil";
+          "extensions.experimental.affinity" = {
+            "asvetliakov.vscode-neovim" = 1;
+          };
         };
       };
     };

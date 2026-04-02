@@ -12,6 +12,7 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lazyvim.url = "github:pfassina/lazyvim-nix";
     spicetify = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,17 +23,25 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-unstable,
       nix-flatpak,
       home-manager,
       nvf,
+      lazyvim,
       spicetify,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
+      overlays = [
+        (final: prev: {
+          inherit (nixpkgs-unstable.legacyPackages.${system}) neovim-unwrapped;
+        })
+      ];
       specialArgs = { inherit inputs; };
       extraSpecialArgs = {
         inherit nvf;
+        inherit lazyvim;
         inherit spicetify;
       };
     in
@@ -44,6 +53,7 @@
             ./hosts/salvo/configuration.nix
             home-manager.nixosModules.home-manager
             nix-flatpak.nixosModules.nix-flatpak
+            { nixpkgs.overlays = overlays; }
             {
               home-manager = {
                 inherit extraSpecialArgs;

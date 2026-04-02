@@ -200,6 +200,7 @@
     unzip
     xdg-utils
     file-roller
+    nil
   ];
 
   fonts.packages = with pkgs; [

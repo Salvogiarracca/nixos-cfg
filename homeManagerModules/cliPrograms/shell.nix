@@ -20,6 +20,8 @@
           ll = "ls -l";
           la = "ls -al";
           cat = "bat";
+          vi = "nvim";
+          vim = "nvim";
         };
         loginExtra = ''
           if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
