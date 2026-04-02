@@ -18,29 +18,35 @@
     })
   ];
 
-  boot.loader = {
-    systemd-boot.enable = false;
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
+  boot = {
+    loader = {
+      systemd-boot.enable = false;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      grub = {
+        enable = true;
+        device = "nodev";
+        useOSProber = true;
+        efiSupport = true;
+        copyKernels = true;
+        extraEntries = ''
+          menuentry "Reboot" {
+            reboot
+          }
+          menuentry "Poweroff" {
+            halt
+          }
+        '';
+      };
     };
-    grub = {
-      enable = true;
-      device = "nodev";
-      useOSProber = true;
-      efiSupport = true;
-      copyKernels = true;
-      extraEntries = ''
-        menuentry "Reboot" {
-          reboot
-        }
-        menuentry "Poweroff" {
-          halt
-        }
-      '';
-    };
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelModules = [
+      "coretemp"
+      "jc42"
+    ];
   };
-  boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Berlin";
@@ -130,6 +136,7 @@
     udev.packages = with pkgs; [
       libwacom
       vial
+      platformio-core
     ];
     udisks2.enable = true;
   };
@@ -144,6 +151,7 @@
         "bluetooth"
         "video"
         "input"
+        "dialout"
       ];
       packages = with pkgs; [
         nix-prefetch-github
@@ -188,6 +196,10 @@
     libinput
     vial
     direnv
+    zip
+    unzip
+    xdg-utils
+    file-roller
   ];
 
   fonts.packages = with pkgs; [

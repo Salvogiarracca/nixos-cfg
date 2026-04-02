@@ -14,27 +14,63 @@ in
     ../../homeManagerModules/default.nix
   ];
 
-  home.username = "salvo";
-  home.homeDirectory = "/home/salvo";
-  home.stateVersion = "25.11";
-  home.sessionVariables = {
-    GTK_THEME = "Tokyonight-Dark";
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    GTK_USE_PORTAL = "1";
-    MOZ_ENABLE_WAYLAND = "1";
-    QT_QPA_PLATFORM = "wayland";
-    XCURSOR_THEME = "Banana";
-    # XCURSOR_SIZE = "24";
-    # QT_QPA_PLATFORMTHEME = "qt5ct"; conflict with gtk,but nice to know
-    EDITOR = "nvim";
-  };
-  home.file = {
-    "nixos-config/walls/lockscreen" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/walls/lockscreen.jpg";
+  home = {
+    username = "salvo";
+    homeDirectory = "/home/salvo";
+    stateVersion = "25.11";
+    sessionVariables = {
+      GTK_THEME = "Tokyonight-Dark";
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      GTK_USE_PORTAL = "1";
+      MOZ_ENABLE_WAYLAND = "1";
+      QT_QPA_PLATFORM = "wayland";
+      XCURSOR_THEME = "Banana";
+      NIXOS_OZONE_WL = "1";
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      # XCURSOR_SIZE = "24";
+      # QT_QPA_PLATFORMTHEME = "qt5ct"; conflict with gtk,but nice to know
+      EDITOR = "nvim";
     };
-    "nixos-config/walls/wall" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/walls/wallpaper.jpg";
+    file = {
+      "nixos-config/walls/lockscreen" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/walls/lockscreen.jpg";
+      };
+      "nixos-config/walls/wall" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/walls/wallpaper.jpg";
+      };
     };
+
+    packages = with pkgs; [
+      qt6.qtwayland
+      libsForQt5.qt5.qtwayland
+      adwaita-qt
+      hypridle
+      hyprpaper
+      orca-slicer
+      bluetui
+      bluez
+      libnotify
+      krita
+      hyprshot
+      wl-clipboard
+      wdisplays
+      lm_sensors
+      nbfc-linux
+      # unstable.arduino-ide
+      (pkgs.symlinkJoin {
+        name = "arduino-ide";
+        paths = [ unstable.arduino-ide ];
+        buildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/arduino-ide \
+            --prefix PATH : ${
+              pkgs.lib.makeBinPath [
+                (pkgs.python3.withPackages (ps: with ps; [ pyserial ]))
+              ]
+            }
+        '';
+      })
+    ];
   };
   xdg.configFile = {
     # This require nixos-rebuild switch to apply changes (immutability)
@@ -153,20 +189,6 @@ in
     enable = true;
     enableZshIntegration = true;
   };
-  home.packages = with pkgs; [
-    qt6.qtwayland
-    libsForQt5.qt5.qtwayland
-    adwaita-qt
-    hypridle
-    hyprpaper
-    orca-slicer
-    bluetui
-    bluez
-    libnotify
-    krita
-    hyprshot
-    wl-clipboard
-  ];
   services = {
     mako = {
       enable = true;
@@ -191,4 +213,5 @@ in
     };
   };
   # blender.enable = false;
+  nvf.enable = false;
 }
