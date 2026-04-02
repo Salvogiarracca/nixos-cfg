@@ -103,6 +103,18 @@
   };
 
   services = {
+    flatpak = {
+      enable = true;
+      remotes = [
+        {
+          name = "flathub";
+          location = "https://flathub.org/repo/flathub.flatpakrepo";
+        }
+      ];
+      packages = [
+        "com.surfshark.Surfshark"
+      ];
+    };
     getty.autologinUser = "salvo";
     pipewire = {
       enable = true;

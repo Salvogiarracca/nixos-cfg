@@ -16,13 +16,13 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
   outputs =
     {
-      self,
       nixpkgs,
-      nixpkgs-unstable,
+      nix-flatpak,
       home-manager,
       nvf,
       spicetify,
@@ -43,6 +43,7 @@
           modules = [
             ./hosts/salvo/configuration.nix
             home-manager.nixosModules.home-manager
+            nix-flatpak.nixosModules.nix-flatpak
             {
               home-manager = {
                 inherit extraSpecialArgs;
