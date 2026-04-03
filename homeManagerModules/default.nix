@@ -5,6 +5,7 @@
     ./cliPrograms/nvf.nix
     ./cliPrograms/lazyvim.nix
     ./cliPrograms/git.nix
+    ./cliPrograms/ssh.nix
     ./cliPrograms/shell.nix
     ./cliPrograms/yazi.nix
     ./cliPrograms/btop.nix
@@ -20,6 +21,7 @@
   nvf.enable = lib.mkDefault true;
   lazyvim.enable = lib.mkDefault true;
   git.enable = lib.mkDefault true;
+  ssh.enable = lib.mkDefault true;
   shell.enable = lib.mkDefault true;
   yazi.enable = lib.mkDefault true;
   btop.enable = lib.mkDefault true;
