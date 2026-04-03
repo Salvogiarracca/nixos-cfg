@@ -23,12 +23,6 @@
           vi = "nvim";
           vim = "nvim";
         };
-        loginExtra = ''
-          if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-              #exec uwsm start default &
-              exec uwsm start hyprland-uwsm.desktop
-          fi
-        '';
       };
       zoxide = {
         enable = true;

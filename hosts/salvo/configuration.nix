@@ -12,7 +12,7 @@
   nixpkgs.overlays = [
     (final: prev: {
       unstable = import inputs.nixpkgs-unstable {
-        system = prev.stdenv.hostPlatform.system;
+        inherit (prev.stdenv.hostPlatform) system;
         config.allowUnfree = true;
       };
     })
@@ -112,6 +112,15 @@
   };
 
   services = {
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd 'uwsm start hyprland-uwsm.desktop'";
+          user = "greeter";
+        };
+      };
+    };
     flatpak = {
       enable = true;
       remotes = [
@@ -124,7 +133,6 @@
         "com.surfshark.Surfshark"
       ];
     };
-    getty.autologinUser = "salvo";
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -146,7 +154,7 @@
   };
   security = {
     polkit.enable = true;
-    pam.services.login.enableGnomeKeyring = true;
+    pam.services.greetd.enableGnomeKeyring = true;
   };
 
   users = {
