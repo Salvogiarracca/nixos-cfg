@@ -142,8 +142,12 @@
       platformio-core
     ];
     udisks2.enable = true;
+    gnome.gnome-keyring.enable = true;
   };
-  security.polkit.enable = true;
+  security = {
+    polkit.enable = true;
+    pam.services.login.enableGnomeKeyring = true;
+  };
 
   users = {
     users.salvo = {

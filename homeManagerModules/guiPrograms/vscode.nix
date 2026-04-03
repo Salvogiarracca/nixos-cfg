@@ -12,7 +12,7 @@
   config = lib.mkIf config.vscode.enable {
     programs.vscode = {
       enable = true;
-      package = pkgs.unstable.vscode-fhs; # Use the FHS version for better extension compatibility
+      package = pkgs.unstable.vscode-fhs;
 
       profiles.default = {
         extensions = with pkgs.unstable.vscode-extensions; [
@@ -36,8 +36,20 @@
           "extensions.experimental.affinity" = {
             "asvetliakov.vscode-neovim" = 1;
           };
+          "github.copilot.enable" = {
+            "*" = false;
+          };
+          "github.copilot.editor.enableAutoCompletions" = false;
+          "inlineSuggest.enabled" = false;
         };
       };
     };
+    home.activation.vscodeArgv = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      argv="$HOME/.vscode/argv.json"
+      if [ -f "$argv" ]; then
+        tmp=$(grep -v '^\s*//' "$argv" | ${pkgs.jq}/bin/jq '. + {"password-store": "gnome-libsecret"}')
+        echo "$tmp" > "$argv"
+      fi
+    '';
   };
 }

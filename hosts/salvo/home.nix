@@ -56,7 +56,6 @@ in
       wdisplays
       lm_sensors
       nbfc-linux
-      # unstable.arduino-ide
       (pkgs.symlinkJoin {
         name = "arduino-ide";
         paths = [ unstable.arduino-ide ];
@@ -146,30 +145,6 @@ in
       };
     };
   };
-  # systemd.user.services.battery-notifier = {
-  #   Unit = {
-  #     Description = "Battery level notifier";
-  #     # PartOf ensures it stops when the session ends
-  #     PartOf = [ "graphical-session.target" ];
-  #   };
-  #   Service = {
-  #     Type = "simple";
-  #     ExecStart = "${pkgs.writeShellScript "battery-check" ''
-  #       while true; do
-  #         LEVEL=$(cat /sys/class/power_supply/BAT1/capacity)
-  #         STATUS=$(cat /sys/class/power_supply/BAT1/status)
-  #         if [ "$STATUS" = "Discharging" ] && [ "$LEVEL" -le 5 ]; then
-  #           ${pkgs.libnotify}/bin/notify-send -u critical -t 0 "Battery Critical" "Level: $LEVEL%"
-  #         fi
-  #         sleep 60
-  #       done
-  #     ''}";
-  #   };
-  #   Install = {
-  #     # This is the 'trigger'—it starts when your Wayland session is ready
-  #     WantedBy = [ "graphical-session.target" ];
-  #   };
-  # };
 
   programs.git.settings = {
     user.name = "Salvatore Giarracca";
