@@ -49,7 +49,10 @@
   };
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
-  time.timeZone = "Europe/Berlin";
+  time = {
+    hardwareClockInLocalTime = true;
+    timeZone = "Europe/Berlin";
+  };
   # nixpkgs.config.allowUnfree = true;
 
   i18n = {
